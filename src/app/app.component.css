@@ -1,0 +1,13 @@
+.container {
+  widows: 100vw;
+  height: 100vh;
+}
+
+.button-align {
+  width: 100%;
+  text-align: left
+}
+
+.menu-text-align {
+  padding: 5px
+}

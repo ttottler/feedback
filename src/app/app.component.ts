@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonService } from './service/common.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'feedback';
+
+  title = 'Student Feedback';
+  enableMenu: boolean = true;
+  menuButtonColor = 'accent';
+  logoutButtonColor = 'primary';
+
+  constructor(public commonService: CommonService){
+
+  }
+
 }
