@@ -1,19 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FeedbackentryComponent } from './feedbackentry/feedbackentry.component';
-import { QuestionmasterComponent } from './questionmaster/questionmaster.component';
-import { StaffmasterComponent } from './staffmaster/staffmaster.component';
-import { StudentSubjectMasterComponent } from './student-subject-master/student-subject-master.component';
-import { StudentmasterComponent } from './studentmaster/studentmaster.component';
-import { SubjectmasterComponent } from './subjectmaster/subjectmaster.component';
 
 const routes: Routes = [
-  { path: 'studentmaster', component: StudentmasterComponent},
-  { path: 'questionmaster', component: QuestionmasterComponent},
-  { path: 'staffmaster', component: StaffmasterComponent},
-  { path: 'subjectmaster', component: SubjectmasterComponent},
-  { path: 'student-subject-master', component: StudentSubjectMasterComponent},
-  { path: 'feedback-entry', component: FeedbackentryComponent}
+  { path: 'master/question', loadChildren: () => import('./components/master/question-master/question-master.module').then(m => m.QuestionMasterModule) },
+  { path: 'master/student', loadChildren: () => import('./components/master/student-master/student-master.module').then(m => m.StudentMasterModule) },
+  { path: 'master/staff', loadChildren: () => import('./components/master/staff-master/staff-master.module').then(m => m.StaffMasterModule) },
+  { path: 'master/subject', loadChildren: () => import('./components/master/subject-master/subject-master.module').then(m => m.SubjectMasterModule) },
+  { path: 'master/student-subject', loadChildren: () => import('./components/master/student-subject-master/student-subject-master.module').then(m => m.StudentSubjectMasterModule) },
+  { path: 'feedback/student', loadChildren: () => import('./components/entry/student-feedback/student-feedback.module').then(m => m.StudentFeedbackModule) },
+  { path: 'feedback-master', loadChildren: () => import('./components/master/feedback-master/feedback-master.module').then(m => m.FeedbackMasterModule) }
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonService } from '../service/common.service';
+import { CommonService } from 'src/app/service/common.service';
 
 @Component({
   selector: 'app-student-subject-master',
@@ -8,10 +8,11 @@ import { CommonService } from '../service/common.service';
 })
 export class StudentSubjectMasterComponent implements OnInit {
 
-  constructor(private commonService: CommonService) { }
+  constructor(private commonService: CommonService) {
+    commonService.setChildTitle('Student-Subject Master');
+   }
 
   ngOnInit(): void {
-    this.commonService.setChildTitle("Student Subject Master");
   }
 
 }

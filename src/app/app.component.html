@@ -22,42 +22,42 @@
       <mat-drawer #matDrawer mode="side" [(opened)]="this.enableMenu"
         style="width: 16%; height: 100%; background-color: #FDFDFD;">
 
-        <button mat-stroked-button [routerLink]="['questionmaster']"
+        <button mat-stroked-button [routerLink]="['master/question']"
           [color]="menuButtonColor" class="button-align"
           matTooltip="Question Master - To feed questions">
           <mat-icon>psychology_alt</mat-icon>
           <span class="menu-text-align">Question Master</span>
         </button>
 
-        <button mat-stroked-button [routerLink]="['studentmaster']"
+        <button mat-stroked-button [routerLink]="['master/student']"
           [color]="menuButtonColor" class="button-align"
-          matTooltip="Student Master - To add all studenet details">
+          matTooltip="Student Master - To add all student details">
           <mat-icon>group</mat-icon>
           <span class="menu-text-align">Student Master</span>
         </button>
 
-        <button mat-stroked-button [routerLink]="['staffmaster']"
+        <button mat-stroked-button [routerLink]="['master/staff']"
           [color]="menuButtonColor" class="button-align"
           matTooltip="Staff Master - To add all teaching staff members">
           <mat-icon>hail</mat-icon>
           <span class="menu-text-align">Staff Master</span>
         </button>
 
-        <button mat-stroked-button [routerLink]="['subjectmaster']"
+        <button mat-stroked-button [routerLink]="['master/subject']"
           [color]="menuButtonColor" class="button-align"
           matTooltip="Subject Master - To add all subjects">
           <mat-icon>subject</mat-icon>
           <span class="menu-text-align">Subject Master</span>
         </button>
 
-        <button mat-stroked-button [routerLink]="['student-subject-master']"
+        <button mat-stroked-button [routerLink]="['master/student-subject']"
           [color]="menuButtonColor" class="button-align"
           matTooltip="Student-Subjec-Master - To Link subjects with student">
           <mat-icon>join_full</mat-icon>
           <span class="menu-text-align">Student-Subject Master</span>
         </button>
 
-        <button mat-stroked-button [routerLink]="['feedback-entry']"
+        <button mat-stroked-button [routerLink]="['feedback/student']"
           [color]="menuButtonColor" class="button-align"
           matTooltip="Feedback Entry for students against staff">
           <mat-icon>question_answer</mat-icon><span class="menu-text-align">Feedback Entry</span>
@@ -69,16 +69,16 @@
 
         <mat-card style="height: 100%; margin: 0%; padding:0%; overflow: auto;">
 
-          <mat-card-title style="height: 30px; margin: 0%; padding-left:5px; padding-right: 5px;
+          <mat-card-title style="height: 30px; margin:5px;
             background-color: #ff4081; color: #FDFDFD;"
             class="mat-elevation-z4">
             <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100%"
               style="font-size: 17px; font-family: 'Calibri'">
-              <b> {{this.commonService.title}} </b>
+              <strong style="padding-left: 5px"> {{this.commonService.title}} </strong>
             </div>
           </mat-card-title>
 
-          <mat-card-content style="overflow: auto; margin-bottom: 0%;">
+          <mat-card-content style="overflow: auto; margin: 5px;">
             <router-outlet></router-outlet>
           </mat-card-content>
 
