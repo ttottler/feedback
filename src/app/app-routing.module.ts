@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'master/subject', loadChildren: () => import('./components/master/subject-master/subject-master.module').then(m => m.SubjectMasterModule) },
   { path: 'master/student-subject', loadChildren: () => import('./components/master/student-subject-master/student-subject-master.module').then(m => m.StudentSubjectMasterModule) },
   { path: 'feedback/student', loadChildren: () => import('./components/entry/student-feedback/student-feedback.module').then(m => m.StudentFeedbackModule) },
-  { path: 'feedback-master', loadChildren: () => import('./components/master/feedback-master/feedback-master.module').then(m => m.FeedbackMasterModule) }
+  { path: 'master/feedbacktype', loadChildren: () => import('./components/master/feedback-master/feedback-master.module').then(m => m.FeedbackMasterModule) }
 ];
 
 @NgModule({

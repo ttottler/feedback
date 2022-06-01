@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from 'src/app/service/common.service';
 
 @Component({
   selector: 'app-feedback-master',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedbackMasterComponent implements OnInit {
 
-  constructor() { }
+  constructor(commonService: CommonService) {
+    commonService.setChildTitle('FeedBack Type Master');
+   }
 
   ngOnInit(): void {
   }
