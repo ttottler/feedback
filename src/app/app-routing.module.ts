@@ -7,8 +7,11 @@ const routes: Routes = [
   { path: 'master/staff', loadChildren: () => import('./components/master/staff-master/staff-master.module').then(m => m.StaffMasterModule) },
   { path: 'master/subject', loadChildren: () => import('./components/master/subject-master/subject-master.module').then(m => m.SubjectMasterModule) },
   { path: 'master/student-subject', loadChildren: () => import('./components/master/student-subject-master/student-subject-master.module').then(m => m.StudentSubjectMasterModule) },
-  { path: 'feedback/student', loadChildren: () => import('./components/entry/student-feedback/student-feedback.module').then(m => m.StudentFeedbackModule) },
-  { path: 'master/feedbacktype', loadChildren: () => import('./components/master/feedback-master/feedback-master.module').then(m => m.FeedbackMasterModule) }
+  { path: 'master/feedbacktype', loadChildren: () => import('./components/master/feedback-master/feedback-master.module').then(m => m.FeedbackMasterModule) },
+  { path: 'master/feedback', loadChildren: () => import('./components/master/feedback-type-master/feedback-type-master.module').then(m => m.FeedbackTypeMasterModule) },
+  { path: 'feedback/student/entry', loadChildren: () => import('./components/entry/student-feedback/student-feedback.module').then(m => m.StudentFeedbackModule) },
+  { path: 'home', loadChildren: () => import('./components/login/home/home.module').then(m => m.HomeModule) },
+  { path: 'login/student', loadChildren: () => import('./components/login/student-login/student-login.module').then(m => m.StudentLoginModule) }
 ];
 
 @NgModule({

@@ -1,0 +1,8 @@
+.mat-column-min {
+  flex: 0 0 10%;
+  min-width: 50px;
+}
+.mat-column-max {
+  flex: 0 0 10%;
+  min-width: 50px;
+}

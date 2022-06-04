@@ -4,12 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 @NgModule(
     {
-        declarations: []
+        declarations: [
+        ]
         , exports: [
             CommonModule,
             FormsModule,
             ReactiveFormsModule,
-            HttpClientModule
+            HttpClientModule,
         ]
     }
 )

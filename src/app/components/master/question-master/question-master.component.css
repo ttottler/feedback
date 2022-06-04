@@ -1,0 +1,9 @@
+.mat-column-feedbackid {
+  flex: 0 0 10%;
+  min-width: 80px;
+}
+.mat-column-questionid {
+  flex: 0 0 10%;
+  min-width: 80px;
+}
+

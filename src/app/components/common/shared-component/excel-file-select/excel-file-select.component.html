@@ -1,0 +1,4 @@
+<input type="file" (change)="onFileChange($event)" accept=".xlsx, .xls" class="file-select" #fileSelect>
+<button mat-raised-button color="accent" id="select_file" (click)="fileSelect.click()">
+  Select File<mat-icon style="padding: 5px" fxFlex>browse_gallery</mat-icon>
+</button>

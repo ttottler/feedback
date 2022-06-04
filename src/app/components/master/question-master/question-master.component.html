@@ -1,1 +1,65 @@
-<p>question-master works!</p>
+<div class="child-container">
+<div fxLayout="column" fxLayoutGap="5px">
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <mat-form-field color="accent" fxFlex="70" fxFlex.lt-md="100" fxFlex.sm="100">
+      <mat-label *ngIf="selectedFeedBackMaster.feedbackid">Selected Feedback Type</mat-label>
+      <mat-label *ngIf="!selectedFeedBackMaster.feedbackid">Select the feedback to proceed</mat-label>
+      <mat-select [(ngModel)]="selectedFeedBackMaster">
+        <mat-option *ngFor="let feedbackMaster of feedbackMasters" [value]="feedbackMaster">
+          {{feedbackMaster.feedbackname}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center start">
+    <mat-error *ngIf="!selectedFeedBackMaster.feedbackid && showError">Please Select Feedback Type</mat-error>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="center space-between"
+    fxLayoutGap="10px" >
+    <div fxLayoutAlign="start stretch" fxFlex="15">
+      <button mat-raised-button color="accent" id="select_file" fxFlex>
+        Select File<mat-icon style="padding: 5px">browse_gallery</mat-icon>
+      </button>
+    </div>
+    <div fxLayoutAlign="start stretch" fxFlex="15">
+      <button mat-raised-button color="accent" id="select_file" fxFlex>
+        Save<mat-icon style="padding: 5px">save</mat-icon>
+      </button>
+    </div>
+    <div fxLayoutAlign="start stretch" fxFlex="15">
+      <button mat-raised-button color="accent" id="select_file" fxFlex (click)="viewQuestionMaster()">
+        View<mat-icon style="padding: 5px">view_list</mat-icon>
+      </button>
+    </div>
+    <div fxLayoutAlign="start stretch" fxFlex="15">
+      <button mat-raised-button color="accent" id="select_file" fxFlex (click)="clear()">
+        Clear<mat-icon style="padding: 5px">clear</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center stretch" *ngIf="questionMasters.length > 0">
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" fxFlex="80%" color="accent">
+      <!-- Questionid Column -->
+      <ng-container matColumnDef="questionid">
+        <mat-header-cell *matHeaderCellDef> Question Id </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.questionid}} </mat-cell>
+      </ng-container>
+
+      <!-- Feedbackid Column -->
+      <ng-container matColumnDef="feedbackid">
+        <mat-header-cell *matHeaderCellDef> Feedback Id </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.feedbackid}} </mat-cell>
+      </ng-container>
+
+      <!-- Quesion Column -->
+      <ng-container matColumnDef="question">
+        <mat-header-cell *matHeaderCellDef> Question Description </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.question }} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayColumns;"></mat-row>
+    </mat-table>
+  </div>
+</div>
+</div>

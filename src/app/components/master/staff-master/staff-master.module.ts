@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { StaffMasterRoutingModule } from './staff-master-routing.module';
 import { StaffMasterComponent } from './staff-master.component';
-import { MaterialComponentsModule } from 'src/app/materialcomponents/material-components-module';
-import { NgSharedModule } from 'src/app/materialcomponents/ngshared/ng-shared-module';
+import { NgSharedModule } from '../../ngshared/ng-shared-module';
+import { MaterialComponentsModule } from '../../materialcomponents/material-components-module';
 
 @NgModule({
   declarations: [

@@ -1,0 +1,44 @@
+[
+  {
+    "feedbackid": 1,
+    "feedbackname": "TeachingLearningFeedback",
+    "min": 1,
+    "max": 5
+  },
+  {
+    "feedbackid": 2,
+    "feedbackname": "Amenities feedback",
+    "min": 1,
+    "max": 5
+  },
+  {
+    "feedbackid": 2,
+    "feedbackname": "Amenities feedback",
+    "min": 1,
+    "max": 5
+  },
+  {
+    "feedbackid": 2,
+    "feedbackname": "Amenities feedback",
+    "min": 1,
+    "max": 5
+  },
+  {
+    "feedbackid": 2,
+    "feedbackname": "Amenities feedback",
+    "min": 1,
+    "max": 5
+  },
+  {
+    "feedbackid": 2,
+    "feedbackname": "Amenities feedback",
+    "min": 1,
+    "max": 5
+  },
+  {
+    "feedbackid": 2,
+    "feedbackname": "Amenities feedback",
+    "min": 1,
+    "max": 5
+  }
+]

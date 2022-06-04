@@ -1,0 +1,5 @@
+{
+  "applicationTitle": "National Engineering College Feedback System",
+  "baseapiurl": "http://localhost:3000/feedback",
+  "secret_key": "1718101119801994"
+}
