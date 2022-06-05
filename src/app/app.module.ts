@@ -8,6 +8,7 @@ import { NgSharedModule } from './components/ngshared/ng-shared-module';
 import { MaterialComponentsModule } from './components/materialcomponents/material-components-module';
 import { AppConfigService } from './service/configuration/app-config.service';
 import { SharedComponentModule } from './components/common/shared-component/shared-component.module';
+import { MessageDialogComponent } from './components/dialog/message-dialog/message-dialog.component';
 
 export function appInit(appConfigService: AppConfigService) {
   return () => appConfigService.getConfig();
@@ -15,7 +16,8 @@ export function appInit(appConfigService: AppConfigService) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MessageDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +27,7 @@ export function appInit(appConfigService: AppConfigService) {
     MaterialComponentsModule,
     SharedComponentModule
   ],
+  entryComponents: [MessageDialogComponent],
   providers: [{ provide: APP_INITIALIZER, useFactory: appInit, deps: [AppConfigService], multi: true }],
   bootstrap: [AppComponent]
 })

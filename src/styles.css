@@ -32,3 +32,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .file-select {
   display: none;
 }
+
+.hand {
+  cursor: pointer;
+}
+
+input.star:checked ~ label.star:before {
+  color: #ff4081 !important;
+  border-color: #ff4081 !important;
+}
+

@@ -7,7 +7,12 @@ import { ApplicationProperties } from 'src/app/interface/configuration/applicati
 })
 export class AppConfigService {
 
-  static applicationProperties: ApplicationProperties;
+  static applicationProperties: ApplicationProperties = {
+    applicationTitle: '',
+    baseapiurl: '',
+    secret_key: '',
+    token: ''
+  };
 
   constructor(private httpClient: HttpClient) { }
 
@@ -15,7 +20,7 @@ export class AppConfigService {
     return new Promise<boolean>((resolve, reject) => {
       this.httpClient.get('assets/application-properties.json').subscribe((data) => {
         AppConfigService.applicationProperties = data as ApplicationProperties;
-        console.log('Properties:', JSON.stringify(data));
+        console.log(AppConfigService.applicationProperties);
         resolve(true);
       }, error => reject(error));
     });

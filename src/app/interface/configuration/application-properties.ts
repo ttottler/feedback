@@ -1,5 +1,6 @@
 export interface ApplicationProperties{
-  readonly applicationTitle: string;
-  readonly baseurl: string;
-  readonly secret_key: string;
+  applicationTitle: string;
+  baseapiurl: string;
+  secret_key: string;
+  token: string;
 }

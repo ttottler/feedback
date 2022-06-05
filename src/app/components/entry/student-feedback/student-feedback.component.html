@@ -1,1 +1,49 @@
-<p>student-feedback works!</p>
+<div class="child-container" fxLayout="row" fxLayoutAlign="center stretch" style="background-color: #ff4081">
+  <div fxFlex="100">
+    <div
+      style="margin-top: 0px; padding: 5px;
+      font-family: 'Calibri', sans-serif; font-size: larger;
+      font-weight: bolder; overflow: auto;"
+      *ngFor="let questionMaster of questionMasters">
+
+      <mat-card style="max-width: 100vw; ">
+        <mat-card-header style="padding-top: 0px; margin-top: -24px; padding-left: 0px; margin-left: -24px;"
+          fxLayout="start stretch">
+          <mat-card-title><p>
+            {{ questionMaster.questionid }}. {{ questionMaster.questiondescription }}
+          </p></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngFor="let studentSubject of studentSubjectMasterJoin">
+            <div *ngIf="(
+                          (
+                            (questionMaster.questiontype == 'T' || questionMaster.questiontype == 'E')
+                            && (studentSubject.subjecttype == 'T' || studentSubject.subjecttype == 'E')
+                          ) ||
+                          (questionMaster.questiontype == 'L' && studentSubject.subjecttype == 'L')
+                        )" fxLayou="row" fxLayoutAlign="start stretch" fxLayoutGap="5px"
+                        style="padding: 5px; height: 45px;">
+              <div fxFlex="45">
+                <button style="text-align: left" mat-stroked-button fxFlex color="accent">{{ studentSubject.subjectcode }} - {{ studentSubject.subjectname }}</button>
+              </div>
+              <div fxFlex="30">
+                <button style="text-align: left" mat-stroked-button fxFlex color="accent">{{ studentSubject.staffname | uppercase }} / {{ studentSubject.staffdepartmentcode | uppercase }} </button>
+              </div>
+              <div fxFlex="30" fxLayoutAlign="start center">
+                 <ngx-star-rating color="accent"  [(ngModel)]="studentSubject[questionMaster.questionidstring]" [id]="questionMaster.questionid +''+ studentSubject.studentsubjectid"></ngx-star-rating>
+              </div>
+            </div>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- <pre>{{studentSubjectMasterJoin| json}}</pre> -->
+    <!-- <pre>{{this.currentQuestion | json }</pre> -->
+  </div>
+</div>
+<div>
+  <button mat-raised-button color="accent" id="save" fxFlex="100" (click)="saveStudentFeedback()">
+    Submit<mat-icon style="padding: 5px">login</mat-icon>
+  </button>
+</div>

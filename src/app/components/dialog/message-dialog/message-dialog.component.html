@@ -1,0 +1,15 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Message<mat-icon style="position: fixed" (click)="this.close();"> highlight_off</mat-icon>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+  </mat-card-content>
+  <mat-card-actions style="text-align: center">
+    <div style="text-align: center">
+      <mat-label>{{this.data.message}}</mat-label><br><br><br>
+      <button mat-raised-button color='primary' (click)="this.close();">Ok</button><br><br>
+    </div>
+  </mat-card-actions>
+</mat-card>

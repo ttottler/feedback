@@ -37,6 +37,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MomentDateModule} from '@angular/material-moment-adapter';
+import { NgxStarRatingModule } from 'ngx-star-rating';
+// import { NgxMaterialRatingModule } from 'ngx-material-rating';
 @NgModule(
     {
         declarations: [ ]
@@ -82,6 +84,7 @@ import { MomentDateModule} from '@angular/material-moment-adapter';
             , MatDatepickerModule
             , MatRippleModule
             , MatNativeDateModule
+            , NgxStarRatingModule
         ]
 
     }

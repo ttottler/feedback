@@ -1,0 +1,22 @@
+.mat-card-title-color {
+  background-color: #ff4081;
+  color: #FDFDFD;
+  font-size: medium;
+}
+.text-overlap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.child-container {
+  overflow: auto;
+  height: 80vh;
+}

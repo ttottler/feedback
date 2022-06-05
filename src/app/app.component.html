@@ -4,15 +4,15 @@
     <mat-toolbar [color]="commonService.menuButtonColor" style="font-weight: bold;" class="mat-elevation-z8">
       <div fxLayout="row" fxLayoutAlign="start center" fxFlex="10%">
         <mat-icon (click)="commonService.enableMenu = !commonService.enableMenu"
-          *ngIf="commonService.loggedIn">menu</mat-icon>
+          *ngIf="commonService.enableAdminScreens">menu</mat-icon>
       </div>
       <div fxLayout="row" fxLayoutAlign="center center" fxFlex="80%">
           <p>{{commonService.title}}</p>
       </div>
-      <div fxLayout="row" fxLayoutAlign="end center" fxFlex="10%">
-        <button mat-raised-button [color]="commonService.logoutButtonColor" *ngIf="commonService.loggedIn">
+      <div fxLayout="row" fxLayoutAlign="end center" fxFlex="10%" class="hand"
+        *ngIf="commonService.loggedIn">
           Logout<mat-icon><span style="padding: 3px"></span>power_settings_new
-          </mat-icon></button>
+          </mat-icon>
       </div>
     </mat-toolbar>
   </div>
@@ -81,7 +81,7 @@
             background-color: #ff4081; color: #FDFDFD;"
             class="mat-elevation-z4">
             <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100%"
-              style="font-size: 17px; font-family: 'Calibri'">
+              style="font-size: 20px; font-family: 'Calibri'">
               <strong style="padding-left: 5px"> {{ commonService.childTitle }} </strong>
             </div>
           </mat-card-title>

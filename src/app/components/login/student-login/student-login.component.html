@@ -1,1 +1,31 @@
-<p>student-login works!</p>
+<div class="child-container" fxLayout="row" fxLayoutAlign="center center">
+  <div flexLayout="col" fxFlex="30" fxFlex.sm="100">
+    <div>
+      <mat-form-field class="example-full-width" appearance="fill" color="accent">
+        <mat-label>Register Number</mat-label>
+        <input matInput placeholder="Enter Register Number" [(ngModel)]="registerNo" type="number">
+      </mat-form-field>
+    </div>
+    <div>
+      <div fxLayoutGap="5px" fxLayoutAlign="space-between center">
+        <mat-form-field class="data-of-birth" appearance="fill" color="accent" fxFlex="25">
+          <mat-label>DOB - Date (DD)</mat-label>
+          <input matInput placeholder="Enter Date" [(ngModel)]="date" type="number" >
+        </mat-form-field>
+        <mat-form-field class="data-of-birth" appearance="fill" color="accent" fxFlex="30">
+          <mat-label>DOB - Month (MM)</mat-label>
+          <input matInput placeholder="Enter Month" [(ngModel)]="month" type="number">
+        </mat-form-field>
+        <mat-form-field class="data-of-birth" appearance="fill" color="accent" fxFlex="35">
+          <mat-label>DOB - Year (YYYY)</mat-label>
+          <input matInput placeholder="Enter Year" [(ngModel)]="year" type="number">
+        </mat-form-field>
+      </div>
+      <div fxLayoutAlign="start stretch">
+        <button mat-raised-button color="accent" id="save" fxFlex="100" (click)="login()">
+          Login<mat-icon style="padding: 5px">login</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
