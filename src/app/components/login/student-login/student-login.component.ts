@@ -1,8 +1,8 @@
-import { DIR_DOCUMENT_FACTORY } from '@angular/cdk/bidi/dir-document-token';
-import { ThisReceiver } from '@angular/compiler';
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { validateBasis } from '@angular/flex-layout';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { ReturnStatus } from 'src/app/model/response/return-status';
 import { EndpointsService } from 'src/app/service/api/endpoints.service';
 import { StudentApiService } from 'src/app/service/api/student/student-api.service';
@@ -16,39 +16,35 @@ import { CommonService } from 'src/app/service/common.service';
 })
 export class StudentLoginComponent implements OnInit {
 
-  minRegNo: number = 7;
-  maxRegNo: number = 10;
-
   registerNo: string = '';
-  date: any;
-  month: any;
-  year: any;
+  dateOfBirth: any;
+  existingFeedback: any[] = [];
 
   constructor(private commonService: CommonService,
     private endPointService: EndpointsService,
     private studentApiService: StudentApiService,
     private studentQueryService: StudentQueryService,
-    private router: Router
+    private router: Router,
+    private datePipe: DatePipe
     ) {
     commonService.childTitle = "Student Login to begin Feedback";
   }
 
   ngOnInit(): void {
     console.log('Feedback Master : ', CommonService.student['feedbackMaster']);
+    // Default settings for check
+    // this.setValueOnInit();
+  }
 
+  setValueOnInit(){
     this.registerNo = "1912001";
-    this.date = "13";
-    this.month = "6";
-    this.year = "1998";
-    // this.login();
-
+    this.dateOfBirth = moment('13-JUN-1998', 'DD-MMM-yyyy');
+    this.login();
   }
 
   ngOnDestroy(): void {
     this.registerNo = '';
-    this.date = '';
-    this.month = '';
-    this.year = '';
+    this.dateOfBirth = '';
   }
 
   async login() {
@@ -57,32 +53,49 @@ export class StudentLoginComponent implements OnInit {
 
       try {
 
-        await this.studentApiService.login(
-          this.endPointService.selectQueryPostMethod(),
-          this.studentQueryService.login(this.registerNo, `${this.date}-${this.month}-${this.year}`)).then((val) => {
-            const returnStatus: ReturnStatus = val as ReturnStatus;
-            if(!returnStatus.status){
-              this.commonService.showMessage(returnStatus.message);
-            } else {
-              if(Array.isArray(returnStatus.data) && !returnStatus.data.length){
-                this.commonService.showMessage('Student Not Found');
-              } else {
+        await this.fetchStudent();
+        if(!CommonService.student['studentMaster'].registerno){
+          return;
+        }
 
-                // Student Found. Next check the Student Subject mapping has done
-                CommonService.student['studentMaster'] = returnStatus.data[0];
-                this.studentSubjectMapping();
+        await this.studentSubjectMapping();
+        if(!(CommonService.student.studentSubjectMaster.length > 0)){
+          return;
+        }
 
-              }
-            }
-          }, (error) => {
-            this.commonService.showMessage(error.message);
-          });
+        await this.checkExistingFeedback();
+
+        if(this.existingFeedback.length == 0){
+          this.commonService.logIn();
+          this.router.navigate(['feedback/student/entry']);
+        } else {
+          this.router.navigate(['home']);
+        }
 
       } catch (error) {
         this.commonService.showMessage(JSON.stringify(error));
       }
 
     }
+  }
+
+  async fetchStudent() {
+    await this.studentApiService.login(
+      this.endPointService.selectQueryPostMethod(),
+      this.studentQueryService.login(this.registerNo, `${this.datePipe.transform(this.dateOfBirth, 'DD-MMM-YYYY')}`)).then((val) => {
+        const returnStatus: ReturnStatus = val as ReturnStatus;
+        if(!returnStatus.status){
+          this.commonService.showMessage(returnStatus.message);
+        } else {
+          if(Array.isArray(returnStatus.data) && !returnStatus.data.length){
+            this.commonService.showMessage('Student Not Found');
+          } else {
+            CommonService.student['studentMaster'] = returnStatus.data[0];
+          }
+        }
+      }, (error) => {
+        this.commonService.showMessage(error.message);
+      });
   }
 
   async studentSubjectMapping(){
@@ -106,8 +119,6 @@ export class StudentLoginComponent implements OnInit {
           } else {
             // Student subject mapping is found
             CommonService.student.studentSubjectMaster = returnStatus.data;
-            this.commonService.logIn();
-            this.router.navigate(['feedback/student/entry']);
           }
         }
 
@@ -121,18 +132,43 @@ export class StudentLoginComponent implements OnInit {
 
   }
 
+  async checkExistingFeedback() {
+
+    try {
+
+      await this.studentApiService.checkExistingFeedback(
+        this.endPointService.selectQueryPostMethod(),
+        this.studentQueryService.checkExistingStudentFeedback(
+          CommonService.student.feedbackMaster.feedbackid,
+          CommonService.student.feedbackMaster.feedbackid,
+          CommonService.student['studentMaster'].registerno)).then((val) => {
+
+            const returnStatus: ReturnStatus = val as ReturnStatus;
+            if(!returnStatus.status){
+              this.commonService.showMessage(returnStatus.message);
+            } else {
+              this.existingFeedback = returnStatus.data;
+              this.commonService.showMessage('You already given your feedback');
+            }
+
+          }, (error) => {
+            this.commonService.showMessage(error.message);
+          });
+
+    } catch (error) {
+      this.commonService.showMessage(JSON.stringify(error));
+    }
+  }
+
   validateForm(){
 
-    if(this.registerNo.length <= 6 || !this.date || !this.month){
-      this.commonService.showMessage('Please Enter Valid Inputs');
+    if(!this.registerNo){
+      this.commonService.showMessage('Enter Register Number');
       return false;
     }
 
-    if(this.date < 10) this.date = "0".concat(this.date);
-    if(this.month < 10) this.month = "0".concat(this.month);
-
-    if(this.year < 1000) {
-      this.commonService.showMessage('Please Enter Valid Inputs');
+    if(!this.dateOfBirth){
+      this.commonService.showMessage('Select your Date of Birth');
       return false;
     }
 

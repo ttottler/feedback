@@ -8,14 +8,14 @@ export class StudentQueryService {
 
   constructor() { }
 
-  public login(registerNo: string, dob: string): string {
+  public login(registerno: string, dob: string): string {
     const query = `select * from ${TABLENAMES.STUDENTMASTER} `
-      +`where registerno = '${registerNo}' and dob = '${dob}' and active = 'Y'`;
+      +`where registerno = '${registerno}' and dob = '${dob}' and active = 'Y'`;
     console.log( query);
     return query;
   }
 
-  public getStudentSubject(feedbackId: string, registerNo: string): string {
+  public getStudentSubject(feedbackId: string, registerno: string): string {
 
     const query = `select stsb.*, subjectname, subjecttype, ` +
       ` staffname, stf.departmentcode as staffdepartmentcode, stf.designationcode, ` +
@@ -23,7 +23,7 @@ export class StudentQueryService {
       ` Left Join ${TABLENAMES.SUBJECTMASTER} sm on stsb.subjectcode = sm.subjectcode` +
       ` Left Join ${TABLENAMES.STAFFMASTER} stf on stsb.staffcode = stf.staffcode `+
       ` Left Join ${TABLENAMES.DESGINATION} dsg on stf.designationcode = dsg.designationcode `+
-      ` where stsb.feedbackid = '${feedbackId}' and stsb.registerno = '${registerNo}'`;
+      ` where stsb.feedbackid = '${feedbackId}' and stsb.registerno = '${registerno}'`;
     console.log(query);
     return query;
   };
@@ -60,6 +60,15 @@ export class StudentQueryService {
 
     query = `${query} ${values}`;
 
+    console.log(query);
+    return query;
+  }
+
+  public checkExistingStudentFeedback(feedbackid: string, tablename: string, registerno: string) {
+    const query = `select FEEDBACKENTRYID from ${tablename} FB ` +
+      `INNER JOIN (SELECT studentsubjectid, feedbackid from ${TABLENAMES.STUDENTSUBJECT} ` +
+      `where feedbackid='${feedbackid}' and registerno = '${registerno}') STSB ` +
+      `on (FB.studentsubjectid = STSB.studentsubjectid) `;
     console.log(query);
     return query;
   }

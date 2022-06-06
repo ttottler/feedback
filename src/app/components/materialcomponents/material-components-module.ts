@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
-import { MatRippleModule, MatNativeDateModule} from '@angular/material/core';
+import { MatRippleModule, MatNativeDateModule, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS} from '@angular/material/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
@@ -36,8 +36,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MomentDateModule} from '@angular/material-moment-adapter';
+import { MomentDateAdapter, MomentDateModule} from '@angular/material-moment-adapter';
 import { NgxStarRatingModule } from 'ngx-star-rating';
+import { MY_FORMATS } from 'src/app/libraries/custom-library/custom-date-format';
+import { DatePipe } from '@angular/common';
 // import { NgxMaterialRatingModule } from 'ngx-material-rating';
 @NgModule(
     {
@@ -85,6 +87,11 @@ import { NgxStarRatingModule } from 'ngx-star-rating';
             , MatRippleModule
             , MatNativeDateModule
             , NgxStarRatingModule
+        ],
+        providers: [
+          DatePipe,
+          { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+          { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
         ]
 
     }

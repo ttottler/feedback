@@ -9,6 +9,9 @@ import { MaterialComponentsModule } from './components/materialcomponents/materi
 import { AppConfigService } from './service/configuration/app-config.service';
 import { SharedComponentModule } from './components/common/shared-component/shared-component.module';
 import { MessageDialogComponent } from './components/dialog/message-dialog/message-dialog.component';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MY_FORMATS } from './libraries/custom-library/custom-date-format';
 
 export function appInit(appConfigService: AppConfigService) {
   return () => appConfigService.getConfig();
@@ -28,7 +31,9 @@ export function appInit(appConfigService: AppConfigService) {
     SharedComponentModule
   ],
   entryComponents: [MessageDialogComponent],
-  providers: [{ provide: APP_INITIALIZER, useFactory: appInit, deps: [AppConfigService], multi: true }],
+  providers: [
+    { provide: APP_INITIALIZER, useFactory: appInit, deps: [AppConfigService], multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

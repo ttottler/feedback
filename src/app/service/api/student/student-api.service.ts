@@ -20,4 +20,8 @@ export class StudentApiService {
     return await this.apiExecuteService.postMethod(url, {query});
   }
 
+  public async checkExistingFeedback(url: string, query: string) {
+    return await this.apiExecuteService.postMethod(url, {query})
+  }
+
 }
