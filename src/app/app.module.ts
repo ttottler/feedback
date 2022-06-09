@@ -12,6 +12,7 @@ import { MessageDialogComponent } from './components/dialog/message-dialog/messa
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS } from './libraries/custom-library/custom-date-format';
+import { NgxComponentsModule } from './components/ngx-components/ngx-components/ngx-components.module';
 
 export function appInit(appConfigService: AppConfigService) {
   return () => appConfigService.getConfig();
@@ -28,7 +29,8 @@ export function appInit(appConfigService: AppConfigService) {
     BrowserAnimationsModule,
     NgSharedModule,
     MaterialComponentsModule,
-    SharedComponentModule
+    SharedComponentModule,
+    NgxComponentsModule
   ],
   entryComponents: [MessageDialogComponent],
   providers: [

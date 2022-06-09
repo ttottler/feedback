@@ -17,7 +17,7 @@ export class CommonQueryService {
   }
 
   public querySelectQuestionMaster(feedbackid: string){
-    let query: string = `select CONCAT('qn',questionid) as questionidstring, * from  ${TABLENAMES.QUESTIONMASTER} ` +
+    let query: string = `select ('qn'+ convert(varchar(3), questionid)) as questionidstring, * from  ${TABLENAMES.QUESTIONMASTER} ` +
       `where feedbackid='${feedbackid}'`;
     console.log(query);
     return query;

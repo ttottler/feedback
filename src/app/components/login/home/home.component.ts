@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ERRORMESSAGE, FEEDBACKTYPECODE } from 'src/app/constants/constants';
 import { InterfaceFeedbackMaster } from 'src/app/model/response/feedbackmaster';
 import { ReturnStatus } from 'src/app/model/response/return-status';
@@ -28,8 +29,11 @@ export class HomeComponent implements OnInit {
     this.commonService.homeScreen = false;
   }
 
-  adminModule() {
+  ngAfterViewInit(): void {
 
+  }
+
+  adminModule() {
   }
 
   async studentFeedback() {
@@ -66,7 +70,6 @@ export class HomeComponent implements OnInit {
   }
 
   staffFeedback() {
-
   }
 
 }

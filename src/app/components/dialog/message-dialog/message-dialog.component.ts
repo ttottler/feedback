@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -6,16 +6,21 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   templateUrl: './message-dialog.component.html',
   styleUrls: ['./message-dialog.component.css']
 })
-export class MessageDialogComponent implements OnInit {
+export class MessageDialogComponent {
 
-  constructor(public matDialogRef: MatDialogRef<MessageDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  infoMetaData: any;
 
+  constructor(public matDialogRef: MatDialogRef<MessageDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      this.infoMetaData = data;
+      this.matDialogRef.disableClose = true;
   }
 
-  ngOnInit() {
+  ngAfterViewInit(): void {
+    document.getElementById("butOk")?.focus();
   }
 
-  close() {
+  ok() {
     this.matDialogRef.close();
   }
 

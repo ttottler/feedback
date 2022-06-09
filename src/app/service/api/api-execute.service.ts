@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ReturnStatus } from 'src/app/model/response/return-status';
+import { CommonService } from '../common.service';
 import { AppConfigService } from '../configuration/app-config.service';
 
 const options = {
@@ -21,16 +22,20 @@ const options = {
 })
 export class ApiExecuteService {
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient,
+    private commonService: CommonService) {
 
   }
 
   public async postMethod(url: string, body: any) {
+    this.commonService.showSpinner();
     return await new Promise((resolve, reject) => {
       this.httpClient.post(url, body, options).subscribe({
         next: (response) => {
+          this.commonService.hideSpinner();
           resolve(response as ReturnStatus);
         }, error: (error) => {
+          this.commonService.hideSpinner();
           const returnStatus: ReturnStatus = {
             status: false,
             data: error,
@@ -38,6 +43,7 @@ export class ApiExecuteService {
           }
           reject(returnStatus);
         }, complete: () => {
+          this.commonService.hideSpinner();
           console.log('API Completed :', url);
         }
       });

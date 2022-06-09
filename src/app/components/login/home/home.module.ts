@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { NgSharedModule } from '../../ngshared/ng-shared-module';
 import { MaterialComponentsModule } from '../../materialcomponents/material-components-module';
+import { NgxComponentsModule } from '../../ngx-components/ngx-components/ngx-components.module';
 
 
 @NgModule({

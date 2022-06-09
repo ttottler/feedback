@@ -1,15 +1,12 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      Message<mat-icon style="position: fixed" (click)="this.close();"> highlight_off</mat-icon>
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-  </mat-card-content>
-  <mat-card-actions style="text-align: center">
-    <div style="text-align: center">
-      <mat-label>{{this.data.message}}</mat-label><br><br><br>
-      <button mat-raised-button color='primary' (click)="this.close();">Ok</button><br><br>
-    </div>
-  </mat-card-actions>
-</mat-card>
+<div style="max-width: 500px">
+  <mat-card>
+    <mat-card-title>{{ infoMetaData.title }}</mat-card-title>
+    <mat-card-content style="overflow: auto; max-height: 50vh; min-height: 50px;
+    font-size: medium;">
+      {{ infoMetaData.message }}
+    </mat-card-content>
+    <mat-card-actions class="center-button">
+      <button mat-raised-button #butOk id="butOk" name="butOk" (click)="ok()">{{ infoMetaData.butCaption }}</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

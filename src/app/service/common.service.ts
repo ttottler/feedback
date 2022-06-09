@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { MessageDialogComponent } from '../components/dialog/message-dialog/message-dialog.component';
-import { InterfaceFeedbackMaster } from '../model/response/feedbackmaster';
-import { InterfaceStudentMaster } from '../model/response/studentmaster';
 import { AppConfigService } from './configuration/app-config.service';
 
 @Injectable({
@@ -19,6 +18,7 @@ export class CommonService {
   pinkColorCode: string = "#ff4081";
   backgroundPinkColor: string = "{'background-color': '`${pinkColorCode}`' }";
   homeScreen: boolean = false;
+  spinnerCaption = "Loading...";
 
   // Student Feedback Related
   static student: any = {
@@ -32,7 +32,8 @@ export class CommonService {
   enableAdminScreens = false;
 
   constructor(public appConfigService: AppConfigService,
-    public matDialog: MatDialog) {
+    public matDialog: MatDialog,
+    public spinner: NgxSpinnerService) {
     this.title = AppConfigService.applicationProperties.applicationTitle;
     this.childTitle = "";
   }
@@ -58,19 +59,32 @@ export class CommonService {
     this.childTitle = '';
   }
 
-  public showMessage(msg: string) {
+  public showMessage(msg: string, title?: string, butCaption?: string) {
 
     const dialogConfig = new MatDialogConfig();
     // dialogConfig.height = '53vh';
     dialogConfig.disableClose = true;
-    const data = {
-      message: msg
+    // const data = {
+    //   infoMetaData
+    // };
+    dialogConfig.data = {
+      message: msg,
+      butCaption: !butCaption ? 'OK' : butCaption,
+      title: !title ? 'Info' : title
     };
-    dialogConfig.data = data;
 
     const ref = this.matDialog.open(MessageDialogComponent, dialogConfig);
+    // const ref = this.matDialog.open(InfoDialogComponent, dialogConfig);
     return ref;
 
+  }
+
+  public showSpinner(){
+    this.spinner.show();
+  }
+
+  public hideSpinner(){
+    this.spinner.hide();
   }
 
 }

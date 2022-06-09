@@ -40,7 +40,6 @@ import { MomentDateAdapter, MomentDateModule} from '@angular/material-moment-ada
 import { NgxStarRatingModule } from 'ngx-star-rating';
 import { MY_FORMATS } from 'src/app/libraries/custom-library/custom-date-format';
 import { DatePipe } from '@angular/common';
-// import { NgxMaterialRatingModule } from 'ngx-material-rating';
 @NgModule(
     {
         declarations: [ ]
@@ -86,7 +85,7 @@ import { DatePipe } from '@angular/common';
             , MatDatepickerModule
             , MatRippleModule
             , MatNativeDateModule
-            , NgxStarRatingModule
+            , NgxStarRatingModule,
         ],
         providers: [
           DatePipe,

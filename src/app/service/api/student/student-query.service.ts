@@ -20,7 +20,7 @@ export class StudentQueryService {
     const query = `select stsb.*, subjectname, subjecttype, ` +
       ` staffname, stf.departmentcode as staffdepartmentcode, stf.designationcode, ` +
       ` designationname  from ${TABLENAMES.STUDENTSUBJECT} stsb ` +
-      ` Left Join ${TABLENAMES.SUBJECTMASTER} sm on stsb.subjectcode = sm.subjectcode` +
+      ` Inner Join ${TABLENAMES.SUBJECTMASTER} sm on stsb.subjectcode = sm.subjectcode and sm.feedbackflag = 'Y'` +
       ` Left Join ${TABLENAMES.STAFFMASTER} stf on stsb.staffcode = stf.staffcode `+
       ` Left Join ${TABLENAMES.DESGINATION} dsg on stf.designationcode = dsg.designationcode `+
       ` where stsb.feedbackid = '${feedbackId}' and stsb.registerno = '${registerno}'`;

@@ -42,3 +42,8 @@ input.star:checked ~ label.star:before {
   border-color: #ff4081 !important;
 }
 
+.mat-dialog-container {
+  padding: 0px !important;
+}
+
+

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ReturnStatus } from 'src/app/model/response/return-status';
+import { CommonService } from '../common.service';
 import { AppConfigService } from '../configuration/app-config.service';
 
 @Injectable({
@@ -8,7 +9,8 @@ import { AppConfigService } from '../configuration/app-config.service';
 })
 export class TokenApiService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+    private commonService: CommonService) { }
 
   public getToken(url: string): Promise<ReturnStatus> {
 
@@ -25,11 +27,17 @@ export class TokenApiService {
     };
 
     return new Promise((resolve, reject) => {
+      this.commonService.showSpinner();
       this.httpClient.get(url, options).subscribe({
         next: (response) => {
+          // Actually here we dont need to hide the spinner because its handled in complete()
+          // Anyway for safety purpose we have hide the spinner
+          this.commonService.hideSpinner();
           const returnStatus = response as ReturnStatus;
           resolve(returnStatus);
         }, error: (error) => {
+          // Here its mandatory to hide the spinner since if error throws it wont goes to complete()
+          this.commonService.hideSpinner();
           const returnStatus: ReturnStatus = {
             status: false,
             data: error,
@@ -37,7 +45,7 @@ export class TokenApiService {
           }
           reject(returnStatus);
         }, complete: () => {
-
+          this.commonService.hideSpinner();
         }
       })
     });

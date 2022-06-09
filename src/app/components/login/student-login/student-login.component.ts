@@ -1,6 +1,5 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { ReturnStatus } from 'src/app/model/response/return-status';
@@ -31,20 +30,18 @@ export class StudentLoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('Feedback Master : ', CommonService.student['feedbackMaster']);
     // Default settings for check
     // this.setValueOnInit();
+  }
+
+  ngAfterViewInit(): void {
+    console.log('Feedback Master : ', CommonService.student['feedbackMaster']);
   }
 
   setValueOnInit(){
     this.registerNo = "1912001";
     this.dateOfBirth = moment('13-JUN-1998', 'DD-MMM-yyyy');
     this.login();
-  }
-
-  ngOnDestroy(): void {
-    this.registerNo = '';
-    this.dateOfBirth = '';
   }
 
   async login() {
@@ -69,7 +66,10 @@ export class StudentLoginComponent implements OnInit {
           this.commonService.logIn();
           this.router.navigate(['feedback/student/entry']);
         } else {
-          this.router.navigate(['home']);
+          const ref = this.commonService.showMessage('You already given your feedback');
+          ref.afterClosed().subscribe((next) => {
+            this.router.navigate(['home']);
+          })
         }
 
       } catch (error) {
@@ -82,7 +82,7 @@ export class StudentLoginComponent implements OnInit {
   async fetchStudent() {
     await this.studentApiService.login(
       this.endPointService.selectQueryPostMethod(),
-      this.studentQueryService.login(this.registerNo, `${this.datePipe.transform(this.dateOfBirth, 'DD-MMM-YYYY')}`)).then((val) => {
+      this.studentQueryService.login(this.registerNo, `${this.datePipe.transform(this.dateOfBirth, 'dd/MM/YYYY')}`)).then((val) => {
         const returnStatus: ReturnStatus = val as ReturnStatus;
         if(!returnStatus.status){
           this.commonService.showMessage(returnStatus.message);
@@ -148,7 +148,6 @@ export class StudentLoginComponent implements OnInit {
               this.commonService.showMessage(returnStatus.message);
             } else {
               this.existingFeedback = returnStatus.data;
-              this.commonService.showMessage('You already given your feedback');
             }
 
           }, (error) => {
